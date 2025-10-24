@@ -22,6 +22,8 @@ public class PhonyfyApiTest {
 
     @BeforeAll
     static void setup() {
+        HibernateConfig.setTest(true);
+
         ApplicationConfig.startServer(7076);
         RestAssured.baseURI = "http://localhost";
         RestAssured.port = 7076;
