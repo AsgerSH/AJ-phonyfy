@@ -11,7 +11,7 @@ import jakarta.persistence.EntityManagerFactory;
 public class Main {
     public static void main(String[] args) {
 
-        System.out.println("Populating database...");
+        System.out.println("Populating database..");
         Populate.seed(HibernateConfig.getEntityManagerFactory());
         System.out.println("Done seeding!");
 
