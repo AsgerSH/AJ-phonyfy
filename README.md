@@ -4,6 +4,7 @@
 A simple REST API for **songs, artists, albums, and playlists**, built with Java and Javalin.
 
 👉 Live routes: [https://phonyfy.storgaardcoding.dk](https://phonyfy.storgaardcoding.dk)
+👉 Live routes: [https://phonyfy.outzenprogramming.dk](https://phonyfy.outzenprogramming.dk/api/songs)
 
 ---
 
