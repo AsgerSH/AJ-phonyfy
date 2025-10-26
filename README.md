@@ -1,24 +1,29 @@
-# API Template (Javalin + Hibernate)
+# 🎵 Phonyfy
 
-This is a template project for creating REST APIs with **Javalin** and **Hibernate**.
+**Phonyfy** — like Spotify, but totally fake.  
+A simple REST API for **songs, artists, albums, and playlists**, built with Java and Javalin.
 
-## How to use
-1. Add a new **Entity** in `app.entities`
-2. Add a matching **DTO** in `app.dtos`
-3. Create a **DAO** in `app.daos`
-4. Create a **Controller** in `app.controllers`
-5. Add **Routes** in `app.routes` and register them in `Routes.java`
+👉 Live routes: [https://phonyfy.storgaardcoding.dk/api/routes](https://phonyfy.storgaardcoding.dk/api/routes)
 
-## Run
-Server starts on **http://localhost:7076/api/v1**
+---
 
-Example:  
-`GET http://localhost:7076/api/v1/sample1` → returns all samples
+## 🚀 Features
+- CRUD endpoints for songs, artists, albums, and playlists  
+- JWT-based authentication (USER / ADMIN roles)  
+- JPA and DTO architecture  
+- Deployed via Docker, Caddy, and GitHub Actions  
 
-## Notes
-- `hibernate.hbm2ddl.auto` is set to `create` by default → change to `update` when keeping data.
-- Tests run with Testcontainers (Postgres).
+---
 
+## ⚙️ Tech Stack
+**Java • Javalin • JPA • JWT • JUnit • Rest Assured • Docker**
 
-## Creator
-[AsgerSH](https://github.com/AsgerSH) (github)
+---
+
+## 👥 Team
+Built by a group of 3rd semester DAT students —  
+coding, learning, and having fun along the way 🎧
+
+---
+
+> “Because why pay for Spotify when you can build Phonyfy?”
