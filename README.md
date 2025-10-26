@@ -3,7 +3,7 @@
 **Phonyfy** — like Spotify, but totally fake.  
 A simple REST API for **songs, artists, albums, and playlists**, built with Java and Javalin.
 
-👉 Live routes: [https://phonyfy.storgaardcoding.dk/api/routes](https://phonyfy.storgaardcoding.dk/api/routes)
+👉 Live routes: [https://phonyfy.storgaardcoding.dk](https://phonyfy.storgaardcoding.dk)
 
 ---
 
@@ -21,8 +21,8 @@ A simple REST API for **songs, artists, albums, and playlists**, built with Java
 ---
 
 ## 👥 Team
-Built by a group of 3rd semester DAT students —  
-coding, learning, and having fun along the way 🎧
+- [Asger Storgaard](https://github.com/AsgerSH)  
+- [Jonas Outzen](https://github.com/JonasOutzen)
 
 ---
 
