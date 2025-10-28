@@ -26,6 +26,26 @@ public class ApplicationConfig {
     public static void configuration(JavalinConfig config) {
         config.showJavalinBanner = false;
         config.bundledPlugins.enableRouteOverview("/routes", Role.ANYONE);
+
+        // --- CORS (Javalin 6.x) ---
+        // Allows your portfolio to fetch from this API.
+        final String envOrigins = System.getenv("ALLOWED_ORIGINS");
+        config.bundledPlugins.enableCors(cors -> {
+            cors.addRule(rule -> {
+                // Primary sites
+                rule.allowHost("https://storgaardcoding.dk");
+                rule.allowHost("https://www.storgaardcoding.dk");
+                if (envOrigins != null && !envOrigins.isBlank()) {
+                    for (String o : envOrigins.split(",")) {
+                        String origin = o.trim();
+                        if (!origin.isEmpty()) rule.allowHost(origin);
+                    }
+                }
+                rule.allowHost("*.storgaardcoding.dk");
+                rule.allowCredentials = true;
+            });
+        });
+
         config.router.contextPath = "/api"; // base path for all endpoints
         config.router.apiBuilder(routes.getRoutes());
         config.router.apiBuilder(SecurityRoutes.getSecuredRoutes());
@@ -40,6 +60,9 @@ public class ApplicationConfig {
 
         app.exception(Exception.class, ApplicationConfig::generalExceptionHandler);
         app.exception(ApiException.class, ApplicationConfig::apiExceptionHandler);
+
+        app.options("/*", ctx -> ctx.status(204));
+
         app.start(port);
         return app;
     }

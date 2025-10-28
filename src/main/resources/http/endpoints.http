@@ -145,7 +145,7 @@ GET {{baseUrl}}/artists/1/albums
 
 ### Create album for artist (ADMIN) — nested route
 # Replace {artistId} with the actual artist id returned from create artist
-POST {{baseUrl}}/artists/13/albums
+POST {{baseUrl}}/artists/1/albums
 Authorization: Bearer {{authToken}}
 Content-Type: application/json
 
@@ -165,8 +165,7 @@ GET {{baseUrl}}/songs
 ### Get song by ID (open)
 GET {{baseUrl}}/songs/1
 
-### Create song (protected; your SongDAO looks up by names)
-# Ensure the artist/album above exist with those names
+### Create song
 POST {{baseUrl}}/songs
 Authorization: Bearer {{authToken}}
 Content-Type: application/json
