@@ -30,18 +30,33 @@ public class SongDAO implements IDAO<SongDTO, Integer> {
     }
 
     @Override
-    public SongDTO read(Integer integer) {
+    public SongDTO read(Integer id) {
         try (EntityManager em = emf.createEntityManager()) {
-            Song song = em.find(Song.class, integer);
+            Song song = em.createQuery("""
+                SELECT s FROM Song s
+                JOIN FETCH s.mainArtist
+                JOIN FETCH s.album
+                WHERE s.songId = :id
+                """, Song.class)
+                    .setParameter("id", id)
+                    .getSingleResult();
+
             return new SongDTO(song);
         }
     }
 
+
     @Override
     public List<SongDTO> readAll() {
         try (EntityManager em = emf.createEntityManager()) {
-            TypedQuery<SongDTO> query = em.createQuery("SELECT new app.dtos.SongDTO(s) FROM Song s", SongDTO.class);
-            return query.getResultList();
+            List<Song> songs = em.createQuery("""
+                SELECT s FROM Song s
+                JOIN FETCH s.mainArtist
+                JOIN FETCH s.album
+                """, Song.class)
+                    .getResultList();
+
+            return songs.stream().map(SongDTO::new).toList();
         }
     }
 
