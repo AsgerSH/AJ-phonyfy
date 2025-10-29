@@ -32,14 +32,14 @@ public class Song {
 
 
     // Relations
-    @ManyToOne(fetch = FetchType.EAGER, optional = false)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "main_artist_id",
             nullable = false,
     foreignKey = @ForeignKey(name = "fk_song_main_artist"))
     private Artist mainArtist;
 
 
-    @ManyToOne(fetch = FetchType.EAGER, optional = false)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "album_id",
             nullable = false,
             foreignKey = @ForeignKey(name = "fk_song_album"))

@@ -32,7 +32,7 @@ public class Playlist {
     @ToString.Exclude
     private UserProfile owner;
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     @JoinTable(name = "playlist_songs", joinColumns = {@JoinColumn(name = "playlist_id",
             referencedColumnName = "playlist_id")},
             inverseJoinColumns = {@JoinColumn(name = "song_id", referencedColumnName = "song_id")}

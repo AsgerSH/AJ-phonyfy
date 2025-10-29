@@ -26,12 +26,12 @@ public class Artist {
 
     private String type;
 
-    @OneToMany(mappedBy = "mainArtist", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "mainArtist", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @Builder.Default
     @ToString.Exclude
     private Set<Song> songSet = new HashSet<>();
 
-    @OneToMany(mappedBy = "artist", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "artist", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @Builder.Default
     @ToString.Exclude
     private Set<Album> albumSet = new HashSet<>();
