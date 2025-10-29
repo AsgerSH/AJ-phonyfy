@@ -10,10 +10,16 @@ import jakarta.persistence.EntityManagerFactory;
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
     public static void main(String[] args) {
+        boolean DEPLOYED = System.getenv("DEPLOYED") != null;
 
-        System.out.println("Populating database..");
-        Populate.seed(HibernateConfig.getEntityManagerFactory());
-        System.out.println("Done seeding!");
+        if (!DEPLOYED) {
+            System.out.println("Populating database..");
+            Populate.seed(HibernateConfig.getEntityManagerFactory());
+            System.out.println("Done seeding!");
+        } else {
+            System.out.println("DEPLOYED=true → skipping database seed");
+        }
 
-        ApplicationConfig.startServer(7076);}
+        ApplicationConfig.startServer(7076);
+    }
 }

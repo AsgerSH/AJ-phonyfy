@@ -84,12 +84,25 @@ public final class Populate {
 
             try {
                 tx.begin();
+                long existing = em.createQuery("select count(u) from User u", Long.class).getSingleResult();
+                if (existing > 0) {
+                    tx.rollback();
+                    em.close();
+                    return;
+                }
 
                 // Roles
-                Role roleUser = new Role("user");
-                Role roleAdmin = new Role("admin");
-                em.persist(roleUser);
-                em.persist(roleAdmin);
+                Role roleUser  = em.find(Role.class, "user");
+                if (roleUser == null) {
+                    roleUser = new Role("user");
+                    em.persist(roleUser);
+                }
+
+                Role roleAdmin = em.find(Role.class, "admin");
+                if (roleAdmin == null) {
+                    roleAdmin = new Role("admin");
+                    em.persist(roleAdmin);
+                }
 
                 // Users (security)
                 User jonas = new User("jonas", "jonaspw");
