@@ -10,15 +10,28 @@ import jakarta.persistence.EntityManagerFactory;
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
     public static void main(String[] args) {
-        boolean DEPLOYED = System.getenv("DEPLOYED") != null;
+        // Parse booleans properly
+        boolean deployed     = Boolean.parseBoolean(System.getenv().getOrDefault("DEPLOYED", "false"));
+        boolean seedIfEmpty  = Boolean.parseBoolean(System.getenv().getOrDefault("SEED_IF_EMPTY", "true"));
 
-        if (!DEPLOYED) {
-            System.out.println("Populating database..");
-            Populate.seed(HibernateConfig.getEntityManagerFactory());
-            System.out.println("Done seeding!");
+        EntityManagerFactory emf = HibernateConfig.getEntityManagerFactory();
+
+        // Seed only if DB is empty (safe to run in prod, idempotent)
+        if (seedIfEmpty && isDbEmpty(emf)) {
+            System.out.println("Seeding database (empty detected)...");
+            Populate.seed(emf);
+            System.out.println("Done seeding.");
         } else {
-            System.out.println("DEPLOYED=true → skipping database seed");
+            System.out.printf("Skipping seed (DEPLOYED=%s, SEED_IF_EMPTY=%s).%n", deployed, seedIfEmpty);
         }
+
         ApplicationConfig.startServer(7076);
+    }
+
+    private static boolean isDbEmpty(EntityManagerFactory emf) {
+        try (EntityManager em = emf.createEntityManager()) {
+            Long count = (Long) em.createQuery("select count(s) from Song s").getSingleResult();
+            return count == 0L;
+        }
     }
 }
